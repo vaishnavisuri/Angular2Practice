@@ -10,14 +10,17 @@ import { UserService } from '../user.service';
 })
 export class LoginComponent implements OnInit {
   
+  isValid: boolean = false;
   loginUser : FormGroup;
   private formSubmitAttempt: boolean;
   passwordPattern: '^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$';
 
-  constructor(private fb:FormBuilder, public router:Router,private user: UserService) {}
+  constructor(private fb:FormBuilder, public router:Router,private user: UserService) {
+ 
+  }
 
   ngOnInit() {
-    console.log("Hit");
+  
     this.loginUser = this.fb.group({
       'userEmail': ['',Validators.required],
       'userPassword': ['',Validators.pattern(this.passwordPattern)]
@@ -33,12 +36,16 @@ export class LoginComponent implements OnInit {
 
   onSubmitLogin(value: any){
     if (this.loginUser.valid && (this.loginUser.value.userEmail == 'a@gmail.com' && this.loginUser.value.userPassword == '123')) {
-      console.log(this.loginUser.value);
-      this.user.setUserLoggedIn();
+     // this.isUserLoggedIn = true;
+      console.log(this.isValid);
+      debugger;
+      this.user.setUserLoggedIn(true);
       this.router.navigate(['dashboard']);
+      
     } else {
-      // validate all form fields
       console.log("not in form");
     }
   }
+
+  
 }

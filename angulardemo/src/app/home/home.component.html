@@ -1,0 +1,38 @@
+<div style="border:2px solid">
+<p defaultColor="violet" apphighlight>
+  home works!
+  {{master}}
+  {{serverName}}
+</p>
+<p >{{name}}</p>
+</div> 
+<br><br>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <input type="text" [(ngModel)]="filteredStatus">
+      <p>
+      <small>
+      <i class="text-muted">Search by staus (Eg: stable,offline,critical)</i>
+    </small>
+  </p>
+  <button class="btn btm primary" (click)="onAddServer()">Add Server</button>
+  <br><br>
+  <h2>App Status: {{ appStatus | async}}</h2>
+      <hr>
+      <ul class="list-group">
+        <li 
+          class="list-group-item"
+          *ngFor="let server of servers | filter:filteredStatus:'status'"
+          [ngClass]="getStatusClass(server)" >
+          <span class="badge float-right">
+                {{ server.status }}
+          </span>
+          <strong>{{ server.name | shorten:15 }}</strong> | 
+          {{ server.instanceType | uppercase }} | 
+          {{ server.started | date:'fullDate'}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

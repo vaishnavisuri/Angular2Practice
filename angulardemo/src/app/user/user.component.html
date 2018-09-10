@@ -1,0 +1,64 @@
+<p>
+  user works!
+  {{birthday | date}}
+</p>
+<p>{{birthday | date:"MM/dd/yy" }}</p>
+<p>{{birthday | date:"fullDate" | uppercase }}</p>
+
+<a [routerLink]='["users",1]'>users</a>
+
+<!-- <app-users></app-users> -->
+
+
+<!-- <p>User with <strong>ID {{ id }}</strong> was loaded</p> -->
+<hr>
+<h3>Reactive Forms</h3>
+<div class="container">
+  <div class="row">
+    <div class="col">
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" >
+          <div formGroupName="userData">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                formControlName="username"
+                id="username">
+                <p *ngIf="!signupForm.get('userData.username').valid && signupForm.get('userData.username').touched" >Please enter valid username</p>
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input 
+                type="email" 
+                class="form-control" 
+                formControlName="email"
+                id="email">
+                <p *ngIf="!signupForm.get('userData.email').valid && signupForm.get('userData.email').touched" >Please enter valid email address</p>
+            </div>
+        </div>
+          <div class="radio" *ngFor="let gender of genders">
+            <label>
+              <input 
+                type="radio"
+                formControlName="gender"
+                [value]="gender">{{gender}}
+            </label>
+          </div>
+          <div formArrayName="hobbies">
+            <h3>Your Hobbies</h3>
+            <button class="btn btn-default" (click)="onAddHobbies()">Add Hobbies</button>
+            <div class="form-group" *ngFor="let hobbyControl of signupForm.get('hobbies').controls; let i = index" >
+              <input 
+              type="text"
+              class="form-control"
+              [formControlName]="i"
+              >
+            </div>
+          </div>
+          <p *ngIf="!signupForm.valid && signupForm.touched" >Please enter valid Data</p>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
-<app-header></app-header>
-
 <div class="container-fluid">
+  <!-- <p-autoComplete [(ngModel)]="autosearch" [suggestions]="results" (completeMethod)="filterCards($event)"></p-autoComplete>
+  {{autosearch}} -->
   <div class="row m-2">
     <div class="col" style="margin-bottom:2px;"  *ngFor='let card of cards;let i = index' >
       <div class="card">
@@ -9,11 +9,11 @@
           <h6 class="card-title">{{i}} {{card.title}}</h6>
           <p class="card-text">{{card.description}}</p>
           <a class="btn btn-primary">Add to cart</a>
+          <!-- <a class="btn btn-success" style="margin-left:20px;">Edit</a> -->
         </div>
       </div>
     </div>
   </div>
 </div>
-<app-footer></app-footer>
 
 <!-- http://www.json-generator.com/api/json/get/bOXQqgyxSG?indent=2 -->

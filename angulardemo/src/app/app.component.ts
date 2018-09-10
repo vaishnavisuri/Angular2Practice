@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  isValid:boolean=false;
+constructor(private user:UserService){
+    // alert( this.user.getUserLoggedIn());
+  }
+
+  
+  ngDoCheck(){
+    this.isValid= this.user.getUserLoggedIn();
+  }
 }
+  
